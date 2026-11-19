@@ -1,0 +1,28 @@
+config {
+  type: "view",
+  description: "Cleaned and typed player stats. Missing markers (-, N.A, N,A, empty) become NULL.",
+  assertions: {
+    nonNull: ["team", "player_name", "position", "birth_date"]
+  }
+}
+
+SELECT
+  TRIM(nationality) AS team,
+  fifaRanking AS fifa_ranking,
+  NULLIF(TRIM(nationalTeamKitSponsor), '') AS kit_sponsor,
+  position,
+  nationalTeamJerseyNumber AS jersey_number,
+  ${cleaning.toDate("playerDob")} AS birth_date,
+  club,
+  TRIM(playerName) AS player_name,
+  ${cleaning.toInt("appearances")} AS appearances,
+  ${cleaning.toInt("goalsScored")} AS goals,
+  ${cleaning.toInt("assistsProvided")} AS assists,
+  ${cleaning.toFloat("dribblesPerNinety")} AS dribbles_per_90,
+  ${cleaning.toFloat("interceptionsPerNinety")} AS interceptions_per_90,
+  ${cleaning.toFloat("tacklesPerNinety")} AS tackles_per_90,
+  ${cleaning.toFloat("totalDuelsWonPerNinety")} AS duels_won_per_90,
+  ${cleaning.toPct("savePercentage")} AS save_pct,
+  ${cleaning.toPct("cleanSheets")} AS clean_sheet_pct,
+  NULLIF(TRIM(brandSponsorAndUsed), '') AS boot_brand
+FROM ${ref("team_players_stat_raw")}

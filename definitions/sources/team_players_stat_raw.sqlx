@@ -1,0 +1,7 @@
+config {
+  type: "declaration",
+  database: "my-test-project-446015",
+  schema: "qatar_wc_raw",
+  name: "team_players_stat_raw",
+  description: "Raw player stats of the FIFA World Cup Qatar 2022, loaded as-is from NDJSON."
+}
