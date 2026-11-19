@@ -1,0 +1,5 @@
+defaultProject: my-test-project-446015
+defaultLocation: us-central1
+defaultDataset: qatar_wc_dataform
+defaultAssertionDataset: qatar_wc_dataform_assertions
+dataformCoreVersion: 3.0.52
