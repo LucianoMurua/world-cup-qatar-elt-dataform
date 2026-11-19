@@ -1,0 +1,18 @@
+config {
+  type: "view",
+  description: "Player leaderboards: global and per-position ranks for goals and assists.",
+  assertions: {
+    uniqueKeys: [["team", "player_name"]]
+  }
+}
+
+SELECT
+  team,
+  player_name,
+  position,
+  goals,
+  assists,
+  IF(goals IS NULL, NULL, RANK() OVER (ORDER BY goals DESC)) AS goals_rank,
+  IF(goals IS NULL, NULL, RANK() OVER (PARTITION BY position ORDER BY goals DESC)) AS goals_rank_in_position,
+  IF(assists IS NULL, NULL, RANK() OVER (ORDER BY assists DESC)) AS assists_rank
+FROM ${ref("stg_players")}
