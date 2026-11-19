@@ -1,0 +1,36 @@
+config {
+  type: "table",
+  description: "One row per national team: squad size, goals, assists, average age and top scorer.",
+  assertions: {
+    uniqueKey: ["team"],
+    nonNull: ["team", "fifa_ranking", "squad_size", "total_goals"],
+    rowConditions: [
+      "squad_size BETWEEN 24 AND 26",
+      "total_goals >= 0",
+      "fifa_ranking BETWEEN 1 AND 100"
+    ]
+  },
+  columns: {
+    players_used: "Players with at least one recorded appearance",
+    avg_age: "Average squad age in years at tournament start (2022-11-20)",
+    top_scorer: "Struct with the team's top scorer name and goals"
+  }
+}
+
+SELECT
+  team,
+  ANY_VALUE(fifa_ranking) AS fifa_ranking,
+  ANY_VALUE(kit_sponsor) AS kit_sponsor,
+  COUNT(*) AS squad_size,
+  COUNTIF(appearances > 0) AS players_used,
+  IFNULL(SUM(goals), 0) AS total_goals,
+  IFNULL(SUM(assists), 0) AS total_assists,
+  ROUND(AVG(DATE_DIFF(DATE '2022-11-20', birth_date, DAY) / 365.25), 1) AS avg_age,
+  ARRAY_AGG(
+    IF(goals IS NOT NULL, STRUCT(player_name, goals), NULL)
+    IGNORE NULLS
+    ORDER BY goals DESC, player_name
+    LIMIT 1
+  )[SAFE_OFFSET(0)] AS top_scorer
+FROM ${ref("stg_players")}
+GROUP BY team
