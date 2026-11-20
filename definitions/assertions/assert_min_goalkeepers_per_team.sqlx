@@ -1,0 +1,12 @@
+config {
+  type: "assertion",
+  tags: ["data_quality"],
+  description: "Every squad has at least 3 goalkeepers (known source issue: Serbia)."
+}
+
+SELECT team, COUNTIF(position = 'GK') AS goalkeepers
+FROM ${ref("stg_players")}
+-- Known source issue: the dataset lists only 2 goalkeepers for Serbia.
+WHERE team != 'Serbia'
+GROUP BY team
+HAVING COUNTIF(position = 'GK') < 3

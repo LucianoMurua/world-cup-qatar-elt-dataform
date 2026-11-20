@@ -1,0 +1,9 @@
+config {
+  type: "assertion",
+  tags: ["data_quality"],
+  description: "The tournament has exactly 32 teams."
+}
+
+SELECT COUNT(DISTINCT team) AS teams
+FROM ${ref("stg_players")}
+HAVING COUNT(DISTINCT team) != 32
