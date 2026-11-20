@@ -1,0 +1,9 @@
+config {
+  type: "assertion",
+  tags: ["data_quality"],
+  description: "A player with goals must have at least one appearance."
+}
+
+SELECT team, player_name, goals, appearances
+FROM ${ref("stg_players")}
+WHERE goals > 0 AND IFNULL(appearances, 0) = 0

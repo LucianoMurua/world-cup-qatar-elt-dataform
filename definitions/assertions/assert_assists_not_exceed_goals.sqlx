@@ -1,0 +1,9 @@
+config {
+  type: "assertion",
+  tags: ["data_quality"],
+  description: "A team cannot have more assists than goals."
+}
+
+SELECT team, total_goals, total_assists
+FROM ${ref("mart_team_summary")}
+WHERE total_assists > total_goals
