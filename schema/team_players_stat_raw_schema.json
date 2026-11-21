@@ -1,0 +1,20 @@
+[
+  {"name": "nationality", "type": "STRING"},
+  {"name": "fifaRanking", "type": "INTEGER"},
+  {"name": "nationalTeamKitSponsor", "type": "STRING"},
+  {"name": "position", "type": "STRING"},
+  {"name": "nationalTeamJerseyNumber", "type": "INTEGER"},
+  {"name": "playerDob", "type": "STRING"},
+  {"name": "club", "type": "STRING"},
+  {"name": "playerName", "type": "STRING"},
+  {"name": "appearances", "type": "STRING"},
+  {"name": "goalsScored", "type": "STRING"},
+  {"name": "assistsProvided", "type": "STRING"},
+  {"name": "dribblesPerNinety", "type": "STRING"},
+  {"name": "interceptionsPerNinety", "type": "STRING"},
+  {"name": "tacklesPerNinety", "type": "STRING"},
+  {"name": "totalDuelsWonPerNinety", "type": "STRING"},
+  {"name": "savePercentage", "type": "STRING"},
+  {"name": "cleanSheets", "type": "STRING"},
+  {"name": "brandSponsorAndUsed", "type": "STRING"}
+]
