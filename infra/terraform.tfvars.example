@@ -1,0 +1,8 @@
+# Copy to terraform.tfvars (ignored by git) and fill in your own values.
+project_id               = "your-project-id"
+region                   = "us-central1"
+dataset_prefix           = "qatar_wc"
+dataform_repo_name       = "world-cup-qatar-elt-dataform"
+github_repo_url          = "https://github.com/YOUR_USER/world-cup-qatar-elt-dataform.git"
+github_token_secret_name = "your-github-token-secret"
+time_zone                = "America/Argentina/Cordoba"
