@@ -33,11 +33,9 @@ jobs:
       - name: Install Dataform CLI
         run: npm install --global @dataform/cli
 
-      - name: Install project dependencies
-        run: dataform install
-
       # Fails on SQLX syntax errors, broken ref() calls, duplicate action names
       # and invalid config blocks. Needs no Google Cloud credentials.
+      # Packages are installed at runtime because the project uses workflow_settings.yaml.
       - name: Compile
         run: dataform compile
 
