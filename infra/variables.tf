@@ -32,7 +32,17 @@ variable "github_token_secret_name" {
 }
 
 variable "time_zone" {
-  description = "Time zone of the Dataform schedules."
+  description = "Time zone of the Dataform schedules (same alias Dataform already stores)."
   type        = string
-  default     = "America/Argentina/Cordoba"
+  default     = "America/Cordoba"
+}
+
+variable "github_repository" {
+  description = "GitHub repository allowed to authenticate through Workload Identity Federation, as OWNER/NAME (exact case)."
+  type        = string
+}
+
+variable "tf_state_bucket" {
+  description = "Name of the GCS bucket that holds the Terraform state. Used to grant the CI service accounts access to it."
+  type        = string
 }
